@@ -13,31 +13,21 @@
 </head>
 
 <body class="inside">
-  <!-- Beginning header -->
   <header>
-    <!-- Beginning nav -->
     <nav>
       <a href="/">Restaurant Reviews</a>
     </nav>
-    <!-- Beginning breadcrumb -->
     <ul id="breadcrumb">
       <li>
         <a href="/">Home</a>
       </li>
     </ul>
-    <!-- End breadcrumb -->
-    <!-- End nav -->
   </header>
-  <!-- End header -->
 
-  <!-- Beginning main -->
   <main id="main-content">
-    <!-- Beginning map -->
-    <section id="map-container">
+    <section id="map-container" role="contentinfo" aria-label="Restaurant location on map">
       <div id="map"></div>
     </section>
-    <!-- End map -->
-    <!-- Beginning restaurant -->
     <h1 id="restaurant-name"></h1>
     <section id="restaurant-container">
       <img id="restaurant-img">
@@ -45,25 +35,18 @@
       <p id="restaurant-address"></p>
       <table id="restaurant-hours"></table>
     </section>
-    <!-- end restaurant -->
-    <!-- Beginning reviews -->
     <section id="reviews-container">
       <ul id="reviews-list"></ul>
     </section>
-    <!-- End reviews -->
   </main>
-  <!-- End main -->
 
-  <!-- Beginning footer -->
   <footer id="footer">
     Copyright (c) 2017
     <a href="/">
       <strong>Restaurant Reviews</strong>
     </a> All Rights Reserved.
   </footer>
-  <!-- End footer -->
 
-  <!-- Beginning scripts -->
   <!-- Database helpers -->
   <script type="text/javascript" src="js/dbhelper.js"></script>
   <!-- Main javascript file -->
@@ -71,7 +54,6 @@
   <!-- Google Maps -->
   <!-- TODO: Replace YOUR_GOOGLE_MAPS_API_KEY with your own Google Maps Javascript API key. Hidden here for security reasons -->
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places&callback=initMap"></script>
-  <!-- End scripts -->
 
 </body>
 

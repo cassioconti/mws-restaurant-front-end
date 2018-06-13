@@ -39,6 +39,10 @@ a img {
   border: none 0px #fff;
 }
 
+:focus {
+  box-shadow: 0 0 3pt 2pt orange;
+}
+
 h1,
 h2,
 h3,
