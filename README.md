@@ -4,11 +4,15 @@ Part 1 of 3 for the Restaurant Reviews App. This project is part of the Udacity 
 
 ## Config
 
-Replace `YOUR_GOOGLE_MAPS_API_KEY` at `index.html:40` by a valid Google Maps Javascript API key.
+Replace `YOUR_GOOGLE_MAPS_API_KEY` by a valid Google Maps Javascript API key at:
+
+- `index.html:42`
+- `restaurant.html:73`
 
 ## How to run
 
 Run a localhost server:
+
 - Python 2: `python -m SimpleHTTPServer 8000`
 - Python 3: `python3 -m http.server 8000`
 
