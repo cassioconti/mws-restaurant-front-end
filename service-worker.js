@@ -18,6 +18,7 @@ self.addEventListener('install', function (event) {
     );
 });
 
+// Update the cache and return the most up to date response
 function updateCache(request, cache) {
     return fetch(request).then(function (response) {
         cache.put(request, response.clone());
@@ -32,6 +33,7 @@ self.addEventListener('fetch', function (event) {
             caches.open(staticCacheName).then(function (cache) {
                 return cache.match(event.request).then(function (response) {
                     if (response) {
+                        // Return the cached response, but update the cache asynchronously
                         updateCache(event.request, cache);
                         return response;
                     }
