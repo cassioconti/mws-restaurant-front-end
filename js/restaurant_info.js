@@ -16,7 +16,22 @@ window.initMap = () => {
       });
       fillBreadcrumb();
       DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
+
+      // Hack to set the tabIndex after the map really finished loading
+      google.maps.event.addListener(self.map, "tilesloaded", () =>
+        setTimeout(() => makeMapsElementsNotFocusable(), 1000));
     }
+  });
+}
+
+function makeMapsElementsNotFocusable() {
+  items = [];
+  items.push(...document.querySelectorAll('#map [tabindex]'));
+  items.push(...document.querySelectorAll('#map iframe'));
+  items.push(...document.querySelectorAll('#map a'));
+  items.push(...document.querySelectorAll('#map button'));
+  Array.from(items).forEach(function (item) {
+    item.setAttribute('tabindex', '-1');
   });
 }
 
@@ -58,7 +73,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const image = document.getElementById('restaurant-img');
   image.className = 'restaurant-img'
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
-  image.alt = restaurant.name;
+  image.alt = `Image representing the restaurant ${restaurant.name}`;
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;

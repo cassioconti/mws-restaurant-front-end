@@ -75,12 +75,28 @@ window.initMap = () => {
     lat: 40.722216,
     lng: -73.987501
   };
+
   self.map = new google.maps.Map(document.getElementById('map'), {
     zoom: 12,
     center: loc,
     scrollwheel: false
   });
   updateRestaurants();
+
+  // Hack to set the tabIndex after the map really finished loading
+  google.maps.event.addListener(self.map, "tilesloaded", () =>
+    setTimeout(() => makeMapsElementsNotFocusable(), 1000));
+}
+
+function makeMapsElementsNotFocusable() {
+  items = [];
+  items.push(...document.querySelectorAll('#map [tabindex]'));
+  items.push(...document.querySelectorAll('#map iframe'));
+  items.push(...document.querySelectorAll('#map a'));
+  items.push(...document.querySelectorAll('#map button'));
+  Array.from(items).forEach(function (item) {
+    item.setAttribute('tabindex', '-1');
+  });
 }
 
 /**
@@ -141,7 +157,7 @@ createRestaurantHTML = (restaurant) => {
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
-  image.alt = restaurant.name;
+  image.alt = `Image representing the restaurant ${restaurant.name}`;
   li.append(image);
 
   const name = document.createElement('h1');
