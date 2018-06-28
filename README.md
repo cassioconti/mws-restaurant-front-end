@@ -6,8 +6,8 @@ Part 1 of 3 for the Restaurant Reviews App. This project is part of the Udacity 
 
 Replace `YOUR_GOOGLE_MAPS_API_KEY` by a valid Google Maps Javascript API key at:
 
-- `index.html:42`
-- `restaurant.html:73`
+- `index.html:47`
+- `restaurant.html:56`
 
 ## How to run
 
