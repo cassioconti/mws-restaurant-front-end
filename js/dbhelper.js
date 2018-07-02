@@ -2,7 +2,6 @@
  * Common database helper functions.
  */
 class DBHelper {
-
   /**
    * Database URL.
    * Change this to restaurants.json file location on your server.
@@ -17,7 +16,7 @@ class DBHelper {
    */
   static fetchRestaurants(callback) {
     fetch(DBHelper.DATABASE_URL)
-      .then((resp) => resp.json())
+      .then(resp => resp.json())
       .then(restaurants => callback(null, restaurants))
       .catch(error => callback(error, null));
   }
@@ -27,7 +26,7 @@ class DBHelper {
    */
   static fetchRestaurantById(id, callback) {
     fetch(`${DBHelper.DATABASE_URL}/${id}`)
-      .then((resp) => resp.json())
+      .then(resp => resp.json())
       .then(restaurant => callback(null, restaurant))
       .catch(() => callback('Restaurant does not exist', null));
   }
@@ -152,5 +151,6 @@ class DBHelper {
     });
     return marker;
   }
-
 }
+
+module.exports = DBHelper;

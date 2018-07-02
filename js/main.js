@@ -1,8 +1,6 @@
-let restaurants,
-  neighborhoods,
-  cuisines
-var map
-var markers = []
+const DBHelper = require('./dbhelper');
+
+self.markers = []
 
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.

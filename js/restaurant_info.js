@@ -1,5 +1,4 @@
-let restaurant;
-var map;
+const DBHelper = require('./dbhelper');
 
 /**
  * Initialize Google map, called from HTML.
