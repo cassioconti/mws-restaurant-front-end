@@ -15,34 +15,38 @@ gulp.task('dist', [
 ]);
 
 gulp.task('clean', () => {
-    return gulp.src('./dist')
+    return gulp.src('dist')
         .pipe(clean());
 });
 
 gulp.task('scripts-dist', function () {
-    gulp.src('./service-worker.js')
+    gulp.src('service-worker.js')
         .pipe(browserify())
-        .pipe(gulp.dest('./dist/'))
-    gulp.src('./js/main.js')
+        .pipe(gulp.dest('dist/'))
+    gulp.src('js/main.js')
         .pipe(sourcemaps.init())
         .pipe(browserify())
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('./dist/js'));
-    gulp.src('./js/restaurant_info.js')
+        .pipe(gulp.dest('dist/js'));
+    gulp.src('js/restaurant_info.js')
         .pipe(sourcemaps.init())
         .pipe(browserify())
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('./dist/js'));
+        .pipe(gulp.dest('dist/js'));
 });
 
 gulp.task('copy-html', function () {
-    gulp.src('./*.html')
-        .pipe(gulp.dest('./dist'));
+    gulp.src('*.html')
+        .pipe(gulp.dest('dist'));
+    gulp.src('manifest.json')
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('copy-images', function () {
     gulp.src('img/*')
         .pipe(gulp.dest('dist/img'));
+    gulp.src('favicon.ico')
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('styles', function () {
