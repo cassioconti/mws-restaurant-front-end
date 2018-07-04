@@ -83,7 +83,12 @@ window.initMap = () => {
 
   // Hack to set the tabIndex after the map really finished loading
   google.maps.event.addListener(self.map, "tilesloaded", () =>
-    setTimeout(() => makeMapsElementsNotFocusable(), 1000));
+    setTimeout(() => onMapLoaded(), 1000));
+}
+
+function onMapLoaded() {
+  makeMapsElementsNotFocusable();
+  addTitlesToMapsFrames();
 }
 
 function makeMapsElementsNotFocusable() {
@@ -92,8 +97,14 @@ function makeMapsElementsNotFocusable() {
   items.push(...document.querySelectorAll('#map iframe'));
   items.push(...document.querySelectorAll('#map a'));
   items.push(...document.querySelectorAll('#map button'));
-  Array.from(items).forEach(function (item) {
+  items.forEach(function (item) {
     item.setAttribute('tabindex', '-1');
+  });
+}
+
+function addTitlesToMapsFrames() {
+  [...document.querySelectorAll('#map iframe')].forEach(function (item) {
+    item.setAttribute('title', 'Google Maps Frame');
   });
 }
 
