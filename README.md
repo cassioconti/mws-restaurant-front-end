@@ -1,13 +1,13 @@
 # Mobile Web Specialist - Restaurant Reviews - Stage 2
 
-Part 2 of 3 for the Restaurant Reviews App. This project is part of the Udacity Mobile Web Specialist nanodegree.
+Restaurant Reviews App. This project is part of the Udacity Mobile Web Specialist nanodegree.
 
 ## Config
 
 Replace `YOUR_GOOGLE_MAPS_API_KEY` by a valid Google Maps Javascript API key at:
 
-- `index.html:49`
-- `restaurant.html:56`
+- `index.html:51`
+- `restaurant.html:58`
 
 # Build
 
