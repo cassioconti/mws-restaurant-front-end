@@ -1,4 +1,4 @@
-# Mobile Web Specialist - Restaurant Reviews - Stage 2
+# Mobile Web Specialist - Restaurant Reviews - Stage 3
 
 Restaurant Reviews App. This project is part of the Udacity Mobile Web Specialist nanodegree.
 
