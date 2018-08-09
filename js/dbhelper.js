@@ -8,14 +8,14 @@ class DBHelper {
    */
   static get DATABASE_URL() {
     const port = 1337 // Change this to your server port
-    return `http://localhost:${port}/restaurants`;
+    return `http://localhost:${port}`;
   }
 
   /**
    * Fetch all restaurants.
    */
   static fetchRestaurants(callback) {
-    fetch(DBHelper.DATABASE_URL)
+    fetch(`${DBHelper.DATABASE_URL}/restaurants`)
       .then(resp => resp.json())
       .then(restaurants => callback(null, restaurants))
       .catch(error => callback(error, null));
@@ -25,9 +25,18 @@ class DBHelper {
    * Fetch a restaurant by its ID.
    */
   static fetchRestaurantById(id, callback) {
-    fetch(`${DBHelper.DATABASE_URL}/${id}`)
-      .then(resp => resp.json())
-      .then(restaurant => callback(null, restaurant))
+    const restaurantPromise = fetch(`${DBHelper.DATABASE_URL}/restaurants/${id}`);
+    const reviewPromise = fetch(`${DBHelper.DATABASE_URL}/reviews?restaurant_id=${id}`);
+
+    Promise.all([restaurantPromise, reviewPromise])
+      .then(resps => {
+        const promises = resps.map(resp => resp.json());
+        return Promise.all(promises);
+      })
+      .then(([restaurant, reviews]) => {
+        restaurant.reviews = reviews;
+        callback(null, restaurant);
+      })
       .catch(() => callback('Restaurant does not exist', null));
   }
 
