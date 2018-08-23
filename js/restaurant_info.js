@@ -46,6 +46,27 @@ function addTitlesToMapsFrames() {
   });
 }
 
+function hookFavoriteButtons(restaurantId, isFavorite) {
+  const emptyStar = document.querySelectorAll('div.star.star-no-favorite')[0];
+  const filledStar = document.querySelectorAll('div.star.star-favorite')[0];
+
+  const clickEvent = (event) => {
+    emptyStar.classList.toggle('star-hidden');
+    filledStar.classList.toggle('star-hidden');
+    const isFavorite = emptyStar.classList.contains('star-hidden');
+    DBHelper.setFavorite(restaurantId, isFavorite);
+  };
+
+  emptyStar.addEventListener('click', clickEvent);
+  filledStar.addEventListener('click', clickEvent);
+
+  if (isFavorite) {
+    filledStar.classList.remove('star-hidden');
+  } else {
+    emptyStar.classList.remove('star-hidden');
+  }
+}
+
 /**
  * Get current restaurant from page URL.
  */
@@ -93,8 +114,11 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   if (restaurant.operating_hours) {
     fillRestaurantHoursHTML();
   }
+
   // fill reviews
   fillReviewsHTML();
+
+  hookFavoriteButtons(restaurant.id, restaurant.is_favorite === 'true')
 }
 
 /**

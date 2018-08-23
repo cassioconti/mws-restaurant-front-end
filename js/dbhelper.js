@@ -29,8 +29,8 @@ class DBHelper {
     const reviewPromise = fetch(`${DBHelper.DATABASE_URL}/reviews?restaurant_id=${id}`);
 
     Promise.all([restaurantPromise, reviewPromise])
-      .then(resps => {
-        const promises = resps.map(resp => resp.json());
+      .then(responses => {
+        const promises = responses.map(resp => resp.json());
         return Promise.all(promises);
       })
       .then(([restaurant, reviews]) => {
@@ -126,6 +126,15 @@ class DBHelper {
         const uniqueCuisines = cuisines.filter((v, i) => cuisines.indexOf(v) == i)
         callback(null, uniqueCuisines);
       }
+    });
+  }
+
+  /**
+   * Set favorite toggle for restaurant
+   */
+  static setFavorite(restaurantId, isFavorite) {
+    const restaurantPromise = fetch(`${DBHelper.DATABASE_URL}/restaurants/${restaurantId}/?is_favorite=${isFavorite}`, {
+      method: 'PUT'
     });
   }
 

@@ -31,7 +31,7 @@ The application will be served at: http://localhost:8887.
 
 ## Dependency - Data provider server
 
-The data server can be found at https://github.com/cassioconti/mws-restaurant-data-server. It is a simple fork of the Udacity provided data server.
+The data server can be found at https://github.com/udacity/mws-restaurant-stage-3. It is the Udacity provided data server.
 
 ## Cleanup
 
