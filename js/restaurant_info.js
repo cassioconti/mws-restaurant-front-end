@@ -67,6 +67,36 @@ function hookFavoriteButtons(restaurantId, isFavorite) {
   }
 }
 
+function hookReviewForm(restaurantId) {
+  const reviewForm = document.getElementById('add-review-form');
+  const messageArea = reviewForm.querySelectorAll('textarea')[0];
+
+  messageArea.addEventListener('keyup', (event) => {
+    messageArea.style.height = "20px";
+    messageArea.style.height = (messageArea.scrollHeight) + "px";
+  });
+
+  reviewForm.addEventListener('submit', (event) => {
+    review = {
+      name: reviewForm.elements.name.value,
+      updatedAt: Date.now(),
+      rating: reviewForm.elements.rating.value ? parseInt(reviewForm.elements.rating.value) : 0,
+      comments: reviewForm.elements.comments.value
+    };
+
+    const ul = document.getElementById('reviews-list');
+    ul.insertBefore(createReviewHTML(review), ul.firstChild);
+
+    DBHelper.postReview(restaurantId, review.name, review.rating, review.comments);
+
+    reviewForm.elements.name.value = "";
+    reviewForm.elements.rating.value = "";
+    reviewForm.elements.comments.value = "";
+
+    event.preventDefault();
+  });
+}
+
 /**
  * Get current restaurant from page URL.
  */
@@ -119,6 +149,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   fillReviewsHTML();
 
   hookFavoriteButtons(restaurant.id, restaurant.is_favorite === 'true')
+  hookReviewForm(restaurant.id);
 }
 
 /**
@@ -173,7 +204,7 @@ createReviewHTML = (review) => {
   li.appendChild(name);
 
   const date = document.createElement('p');
-  date.innerHTML = review.date;
+  date.innerHTML = new Date(review.updatedAt);
   li.appendChild(date);
 
   const rating = document.createElement('p');

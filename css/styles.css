@@ -335,14 +335,13 @@ nav a {
 
 #reviews-list li {
   background-color: #fff;
-  border: 2px solid #f3f3f3;
   display: block;
   list-style-type: none;
   margin: 0 0 30px;
   overflow: hidden;
-  padding: 0 20px 20px;
+  padding: 20px;
   position: relative;
-  width: 85%;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
 }
 
 #reviews-list li p {
@@ -358,4 +357,78 @@ nav a {
   #reviews-container {
     width: 100%;
   }
+}
+
+.form-style {
+  padding: 30px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+}
+
+.form-style input[type="text"],
+.form-style textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 7px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
+  font: 16px Arial, Helvetica, sans-serif;
+  height: 45px;
+}
+
+.form-style textarea {
+  resize: none;
+  overflow: hidden;
+}
+
+.form-style input[type="submit"] {
+  background-color: #2CBBBB;
+  border: 1px solid #27A0A0;
+  cursor: pointer;
+  color: #FFFFFF;
+  padding: 8px 18px;
+  text-transform: uppercase;
+}
+
+.form-style input[type="submit"]:hover {
+  background: linear-gradient(to bottom, #34CACA 5%, #30C9C9 100%);
+  background-color: #34CACA;
+}
+
+#add-review-form .hide {
+  display: none;
+}
+
+#add-review-form .clear {
+  float: none;
+  clear: both;
+}
+
+#add-review-form .rating {
+  direction: rtl;
+  text-align: left;
+  margin: 0 0 5px;
+}
+
+#add-review-form .rating>label {
+  position: relative;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+#add-review-form .rating>label:hover,
+#add-review-form .rating>label:hover~label,
+#add-review-form .rating>input.radio-btn:checked~label {
+  color: transparent;
+}
+
+#add-review-form .rating>label:hover:before,
+#add-review-form .rating>label:hover~label:before,
+#add-review-form .rating>input.radio-btn:checked~label:before,
+#add-review-form .rating>input.radio-btn:checked~label:before {
+  content: "\2605";
+  position: absolute;
+  left: 0;
+  color: #FFD700;
 }

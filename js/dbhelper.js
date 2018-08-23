@@ -139,6 +139,24 @@ class DBHelper {
   }
 
   /**
+   * Post a review
+   */
+  static postReview(restaurantId, name, rating, comments) {
+    const restaurantPromise = fetch(`${DBHelper.DATABASE_URL}/reviews`, {
+      method: 'POST',
+      headers: {
+        "content-type": "application/json; charset=utf-8"
+      },
+      body: JSON.stringify({
+        restaurant_id: restaurantId,
+        name,
+        rating,
+        comments
+      })
+    });
+  }
+
+  /**
    * Restaurant page URL.
    */
   static urlForRestaurant(restaurant) {
