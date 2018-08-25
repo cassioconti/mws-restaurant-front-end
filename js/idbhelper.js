@@ -43,6 +43,16 @@ class IdbHelper {
         });
     }
 
+    clearReviews() {
+        return this._dbPromiseReview.then(function (db) {
+            if (!db) return;
+
+            var tx = db.transaction('reviews', 'readwrite');
+            var store = tx.objectStore('reviews');
+            store.clear();
+        });
+    }
+
     addReviews(reviews) {
         return this._dbPromiseReview.then(function (db) {
             if (!db) return;
