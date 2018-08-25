@@ -90,16 +90,27 @@ function hookReviewForm(restaurantId) {
         const ul = document.getElementById('reviews-list');
         ul.insertBefore(createReviewHTML(review), ul.firstChild);
 
-        DBHelper.postReview(restaurantId, review.name, review.rating, review.comments);
+        DBHelper.postReview(restaurantId, review.name, review.rating, review.comments)
+            .then(() => toastrHandler.notify('Review added successfully'))
+            .catch(() => {
+                toastrHandler.notify('Review\'s server is not reachable now. We will automatically keep trying and let you know when we succeed.');
+                keepTryingToPost(restaurantId, review.name, review.rating, review.comments);
+            });
 
         reviewForm.elements.name.value = '';
         reviewForm.elements.rating.value = '';
         reviewForm.elements.comments.value = '';
 
-        toastrHandler.notify('Review added successfully');
-
         event.preventDefault();
     });
+}
+
+function keepTryingToPost(restaurantId, name, rating, comments) {
+    setTimeout(() => {
+        DBHelper.postReview(restaurantId, name, rating, comments)
+            .then(() => toastrHandler.notify('Review added successfully'))
+            .catch(() => keepTryingToPost(restaurantId, name, rating, comments));
+    }, 5000);
 }
 
 /**
