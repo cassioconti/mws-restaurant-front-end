@@ -3,6 +3,7 @@
         "Focusable",
         "dbhelper",
         "googlecode",
+        "idbhelper",
         "latlng",
         "scrollwheel",
         "tabindex",

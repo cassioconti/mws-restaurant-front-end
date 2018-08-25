@@ -7,6 +7,8 @@
     "toastr": "^2.1.4"
   },
   "devDependencies": {
+    "depcheck": "^0.6.11",
+    "eslint": "^5.4.0",
     "gulp": "^3.9.1",
     "gulp-browserify": "^0.5.1",
     "gulp-clean": "^0.4.0",
@@ -14,6 +16,8 @@
   },
   "scripts": {
     "gulp": "gulp",
-    "gulp clean": "gulp clean"
+    "gulp clean": "gulp clean",
+    "lint": "eslint js/*",
+    "depcheck": "depcheck"
   }
 }

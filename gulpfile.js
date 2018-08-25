@@ -5,7 +5,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var browserify = require('gulp-browserify');
 var clean = require('gulp-clean');
 
-gulp.task('default', ['copy-html', 'copy-images', 'styles', 'scripts-dist'], function () {});
+gulp.task('default', ['copy-html', 'copy-images', 'styles', 'scripts-dist'], function () { });
 
 gulp.task('dist', [
     'copy-html',
@@ -22,7 +22,7 @@ gulp.task('clean', () => {
 gulp.task('scripts-dist', function () {
     gulp.src('service-worker.js')
         .pipe(browserify())
-        .pipe(gulp.dest('dist/'))
+        .pipe(gulp.dest('dist/'));
     gulp.src('js/main.js')
         .pipe(sourcemaps.init())
         .pipe(browserify())

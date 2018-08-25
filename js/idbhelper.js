@@ -4,7 +4,7 @@ const idb = require('idb');
 class IdbHelper {
     constructor() {
         this._dbPromiseRestaurant = idb.open('restaurant', 1, function (upgradeDb) {
-            var store = upgradeDb.createObjectStore('restaurants', {
+            upgradeDb.createObjectStore('restaurants', {
                 keyPath: 'id'
             });
         });

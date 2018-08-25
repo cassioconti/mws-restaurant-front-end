@@ -58,39 +58,43 @@ self.addEventListener('fetch', function (event) {
     if (requestUrl.origin === dataServer) {
         // Return the cached response if any, but update the cache asynchronously
         switch (true) {
-            case new RegExp(`^${dataServer}\\/restaurants$`).test(event.request.url):
-                event.respondWith(idbHelper.getAllRestaurants()
-                    .then(restaurants => {
-                        updateDatabase(event.request, restaurants => idbHelper.addRestaurants(restaurants));
-                        return new Response(JSON.stringify(restaurants));
-                    })
-                    .catch(() => updateDatabase(event.request, restaurants => idbHelper.addRestaurants(restaurants)))
-                    .catch(error => console.error(error)));
-                break;
-            case new RegExp(`^${dataServer}\\/restaurants\\/\\d+$`).test(event.request.url):
-                const id = Number(event.request.url.replace(`${dataServer}/restaurants/`, ''));
-                event.respondWith(idbHelper.getRestaurant(id)
-                    .then(restaurant => {
-                        updateDatabase(event.request, restaurant => idbHelper.addRestaurants([restaurant]));
-                        return new Response(JSON.stringify(restaurant));
-                    })
-                    .catch(() => updateDatabase(event.request, restaurant => idbHelper.addRestaurants([restaurant])))
-                    .catch(error => console.error(error)));
-                break;
-            case new RegExp(`^${dataServer}\\/reviews\\?restaurant_id=\\d+$`).test(event.request.url):
-                const restaurantId = Number(event.request.url.replace(new RegExp(`^${dataServer}\\/reviews\\?restaurant_id=`), ''));
-                event.respondWith(idbHelper.getAllReviewsForRestaurant(restaurantId)
-                    .then(reviews => {
-                        if (reviews.length === 0) return Promise.reject();
+        case new RegExp(`^${dataServer}\\/restaurants$`).test(event.request.url): {
+            event.respondWith(idbHelper.getAllRestaurants()
+                .then(restaurants => {
+                    updateDatabase(event.request, restaurants => idbHelper.addRestaurants(restaurants));
+                    return new Response(JSON.stringify(restaurants));
+                })
+                .catch(() => updateDatabase(event.request, restaurants => idbHelper.addRestaurants(restaurants)))
+                .catch(error => console.error(error)));
+            break;
+        }
+        case new RegExp(`^${dataServer}\\/restaurants\\/\\d+$`).test(event.request.url): {
+            const id = Number(event.request.url.replace(`${dataServer}/restaurants/`, ''));
+            event.respondWith(idbHelper.getRestaurant(id)
+                .then(restaurant => {
+                    updateDatabase(event.request, restaurant => idbHelper.addRestaurants([restaurant]));
+                    return new Response(JSON.stringify(restaurant));
+                })
+                .catch(() => updateDatabase(event.request, restaurant => idbHelper.addRestaurants([restaurant])))
+                .catch(error => console.error(error)));
+            break;
+        }
+        case new RegExp(`^${dataServer}\\/reviews\\?restaurant_id=\\d+$`).test(event.request.url): {
+            const restaurantId = Number(event.request.url.replace(new RegExp(`^${dataServer}\\/reviews\\?restaurant_id=`), ''));
+            event.respondWith(idbHelper.getAllReviewsForRestaurant(restaurantId)
+                .then(reviews => {
+                    if (reviews.length === 0) return Promise.reject();
 
-                        updateDatabase(event.request, reviews => idbHelper.addReviews(reviews));
-                        return new Response(JSON.stringify(reviews));
-                    })
-                    .catch(e => updateDatabase(event.request, reviews => idbHelper.addReviews(reviews)))
-                    .catch(error => console.error(error)));
-                break;
-            default:
-                break;
+                    updateDatabase(event.request, reviews => idbHelper.addReviews(reviews));
+                    return new Response(JSON.stringify(reviews));
+                })
+                .catch(() => updateDatabase(event.request, reviews => idbHelper.addReviews(reviews)))
+                .catch(error => console.error(error)));
+            break;
+        }
+        default: {
+            break;
+        }
         }
 
         return;
