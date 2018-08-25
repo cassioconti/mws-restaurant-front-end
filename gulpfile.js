@@ -52,4 +52,6 @@ gulp.task('copy-images', function () {
 gulp.task('styles', function () {
     gulp.src('css/*')
         .pipe(gulp.dest('dist/css'));
+    gulp.src('node_modules/toastr/build/toastr.min.css')
+        .pipe(gulp.dest('dist/css'));
 });

@@ -5,6 +5,7 @@
         "googlecode",
         "latlng",
         "scrollwheel",
-        "tabindex"
+        "tabindex",
+        "toastr"
     ]
 }

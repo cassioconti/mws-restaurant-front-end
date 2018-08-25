@@ -133,7 +133,7 @@ class DBHelper {
    * Set favorite toggle for restaurant
    */
   static setFavorite(restaurantId, isFavorite) {
-    const restaurantPromise = fetch(`${DBHelper.DATABASE_URL}/restaurants/${restaurantId}/?is_favorite=${isFavorite}`, {
+    return fetch(`${DBHelper.DATABASE_URL}/restaurants/${restaurantId}/?is_favorite=${isFavorite}`, {
       method: 'PUT'
     });
   }
@@ -142,7 +142,7 @@ class DBHelper {
    * Post a review
    */
   static postReview(restaurantId, name, rating, comments) {
-    const restaurantPromise = fetch(`${DBHelper.DATABASE_URL}/reviews`, {
+    return fetch(`${DBHelper.DATABASE_URL}/reviews`, {
       method: 'POST',
       headers: {
         "content-type": "application/json; charset=utf-8"
