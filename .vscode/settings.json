@@ -5,6 +5,7 @@
         "googlecode",
         "idbhelper",
         "latlng",
+        "readwrite",
         "scrollwheel",
         "tabindex",
         "toastr"

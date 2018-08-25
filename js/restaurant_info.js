@@ -1,5 +1,6 @@
 /*global google*/
 const DBHelper = require('./dbhelper');
+const idbHelper = require('./idbhelper');
 const ToastrHandler = require('./toastr-handler');
 const toastrHandler = new ToastrHandler();
 
@@ -81,10 +82,13 @@ function hookReviewForm(restaurantId) {
 
     reviewForm.addEventListener('submit', (event) => {
         const review = {
-            name: reviewForm.elements.name.value,
+            id: Date.now(),
+            createdAt: Date.now(),
             updatedAt: Date.now(),
+            restaurant_id: restaurantId,
+            name: reviewForm.elements.name.value,
             rating: reviewForm.elements.rating.value ? parseInt(reviewForm.elements.rating.value) : 0,
-            comments: reviewForm.elements.comments.value
+            comments: reviewForm.elements.comments.value,
         };
 
         const ul = document.getElementById('reviews-list');
@@ -96,6 +100,8 @@ function hookReviewForm(restaurantId) {
                 toastrHandler.notify('Review\'s server is not reachable now. We will automatically keep trying and let you know when we succeed.');
                 keepTryingToPost(restaurantId, review.name, review.rating, review.comments);
             });
+
+        idbHelper.addReviews([review]);
 
         reviewForm.elements.name.value = '';
         reviewForm.elements.rating.value = '';
