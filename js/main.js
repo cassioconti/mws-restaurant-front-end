@@ -66,27 +66,6 @@ function fillCuisinesHTML(cuisines = self.cuisines) {
     });
 }
 
-/**
- * Initialize Google map, called from HTML.
- */
-window.initMap = () => {
-    let loc = {
-        lat: 40.722216,
-        lng: -73.987501
-    };
-
-    self.map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 12,
-        center: loc,
-        scrollwheel: false
-    });
-    updateRestaurants();
-
-    // Hack to set the tabIndex after the map really finished loading
-    google.maps.event.addListener(self.map, 'tilesloaded', () =>
-        setTimeout(() => onMapLoaded(), 1000));
-};
-
 function onMapLoaded() {
     makeMapsElementsNotFocusable();
     addTitlesToMapsFrames();
@@ -214,3 +193,28 @@ if ('serviceWorker' in navigator) {
             console.log('Service worker registration failed, error:', error);
         });
 }
+
+
+/**
+ * Initialize Google map, called from HTML.
+ */
+window.initMap = () => {
+    let loc = {
+        lat: 40.722216,
+        lng: -73.987501
+    };
+
+    self.map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        center: loc,
+        scrollwheel: false
+    });
+
+    updateRestaurants();
+
+    // Hack to set the tabIndex after the map really finished loading
+    google.maps.event.addListener(self.map, 'tilesloaded', () =>
+        setTimeout(() => onMapLoaded(), 1000));
+};
+
+window.updateRestaurants = updateRestaurants;

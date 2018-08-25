@@ -4,6 +4,7 @@
         "dbhelper",
         "googlecode",
         "idbhelper",
+        "labelledby",
         "latlng",
         "readwrite",
         "scrollwheel",
