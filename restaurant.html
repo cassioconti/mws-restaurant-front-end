@@ -33,8 +33,8 @@
       <div id="map"></div>
     </section>
     <h2 id="restaurant-name"></h2>
-    <div class="star star-no-favorite star-hidden" title="Save as favorite">☆</div>
-    <div class="star star-favorite star-hidden" title="Remove from favorites">★</div>
+    <div tabindex="0" role="button" class="star star-no-favorite star-hidden" aria-label="Add restaurant to favorites" title="Click to save as favorite">☆</div>
+    <div tabindex="0" role="button" class="star star-favorite star-hidden" aria-label="Remove restaurant from favorites" title="Click to remove from favorites">★</div>
     <section id="restaurant-container">
       <img id="restaurant-img">
       <p id="restaurant-cuisine"></p>
@@ -47,17 +47,16 @@
         <form id="add-review-form" action="#">
           <input type="text" name="name" placeholder="Full Name" required />
           <div class="rating">
-            <input id="star5" name="rating" type="radio" value="5" class="radio-btn hide" />
+            <input id="star5" name="rating" type="radio" value="5" class="radio-btn hide" aria-label="rating 5 of 5 stars" />
             <label for="star5">☆</label>
-            <input id="star4" name="rating" type="radio" value="4" class="radio-btn hide" />
+            <input id="star4" name="rating" type="radio" value="4" class="radio-btn hide" aria-label="rating 4 of 5 stars" />
             <label for="star4">☆</label>
-            <input id="star3" name="rating" type="radio" value="3" class="radio-btn hide" />
+            <input id="star3" name="rating" type="radio" value="3" class="radio-btn hide" aria-label="rating 3 of 5 stars" />
             <label for="star3">☆</label>
-            <input id="star2" name="rating" type="radio" value="2" class="radio-btn hide" />
+            <input id="star2" name="rating" type="radio" value="2" class="radio-btn hide" aria-label="rating 2 of 5 stars" />
             <label for="star2">☆</label>
-            <input id="star1" name="rating" type="radio" value="1" class="radio-btn hide" />
+            <input id="star1" name="rating" type="radio" value="1" class="radio-btn hide" aria-label="rating 1 of 5 stars" />
             <label for="star1">☆</label>
-            <div class="clear"></div>
           </div>
           <textarea placeholder="Message" name="comments" required></textarea>
           <input type="submit" value="Post" />

@@ -398,12 +398,8 @@ nav a {
 }
 
 #add-review-form .hide {
-  display: none;
-}
-
-#add-review-form .clear {
-  float: none;
-  clear: both;
+  width: 0;
+  opacity: 0;
 }
 
 #add-review-form .rating {
@@ -413,7 +409,6 @@ nav a {
 }
 
 #add-review-form .rating>label {
-  position: relative;
   cursor: pointer;
   font-size: 20px;
 }
@@ -426,10 +421,8 @@ nav a {
 
 #add-review-form .rating>label:hover:before,
 #add-review-form .rating>label:hover~label:before,
-#add-review-form .rating>input.radio-btn:checked~label:before,
 #add-review-form .rating>input.radio-btn:checked~label:before {
   content: "\2605";
   position: absolute;
-  left: 0;
   color: #FFD700;
 }

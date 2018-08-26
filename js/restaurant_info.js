@@ -59,10 +59,24 @@ function hookFavoriteButtons(restaurantId, isFavorite) {
         filledStar.classList.toggle('star-hidden');
         const isFavorite = emptyStar.classList.contains('star-hidden');
         DBHelper.setFavorite(restaurantId, isFavorite);
+        if (isFavorite) {
+            filledStar.focus();
+        } else {
+            emptyStar.focus();
+        }
+    };
+
+    const keypressEvent = (event) => {
+        if (event.key === ' ' || event.key === 'Enter') {
+            event.preventDefault();
+            clickEvent();
+        }
     };
 
     emptyStar.addEventListener('click', clickEvent);
     filledStar.addEventListener('click', clickEvent);
+    emptyStar.addEventListener('keypress', keypressEvent);
+    filledStar.addEventListener('keypress', keypressEvent);
 
     if (isFavorite) {
         filledStar.classList.remove('star-hidden');
@@ -80,35 +94,37 @@ function hookReviewForm(restaurantId) {
         messageArea.style.height = (messageArea.scrollHeight) + 'px';
     });
 
-    reviewForm.addEventListener('submit', (event) => {
-        const review = {
-            id: Date.now(),
-            createdAt: Date.now(),
-            updatedAt: Date.now(),
-            restaurant_id: restaurantId,
-            name: reviewForm.elements.name.value,
-            rating: reviewForm.elements.rating.value ? parseInt(reviewForm.elements.rating.value) : 0,
-            comments: reviewForm.elements.comments.value,
-        };
+    reviewForm.addEventListener('submit', () => submitReviewForm(restaurantId, reviewForm));
+}
 
-        const ul = document.getElementById('reviews-list');
-        ul.insertBefore(createReviewHTML(review), ul.firstChild);
+function submitReviewForm(restaurantId, reviewForm) {
+    event.preventDefault();
 
-        DBHelper.postReview(restaurantId, review.name, review.rating, review.comments)
-            .then(() => toastrHandler.notify('Review added successfully'))
-            .catch(() => {
-                toastrHandler.notify('Review\'s server is not reachable now. We will automatically keep trying and let you know when we succeed.');
-                keepTryingToPost(restaurantId, review.name, review.rating, review.comments);
-            });
+    const review = {
+        id: Date.now(),
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+        restaurant_id: restaurantId,
+        name: reviewForm.elements.name.value,
+        rating: reviewForm.elements.rating.value ? parseInt(reviewForm.elements.rating.value) : 0,
+        comments: reviewForm.elements.comments.value,
+    };
 
-        idbHelper.addReviews([review]);
+    const ul = document.getElementById('reviews-list');
+    ul.insertBefore(createReviewHTML(review), ul.firstChild);
 
-        reviewForm.elements.name.value = '';
-        reviewForm.elements.rating.value = '';
-        reviewForm.elements.comments.value = '';
+    DBHelper.postReview(restaurantId, review.name, review.rating, review.comments)
+        .then(() => toastrHandler.notify('Review added successfully'))
+        .catch(() => {
+            toastrHandler.notify('Review\'s server is not reachable now. We will automatically keep trying and let you know when we succeed.');
+            keepTryingToPost(restaurantId, review.name, review.rating, review.comments);
+        });
 
-        event.preventDefault();
-    });
+    idbHelper.addReviews([review]);
+
+    reviewForm.elements.name.value = '';
+    reviewForm.elements.rating.value = '';
+    reviewForm.elements.comments.value = '';
 }
 
 function keepTryingToPost(restaurantId, name, rating, comments) {
