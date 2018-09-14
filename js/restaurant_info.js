@@ -160,6 +160,33 @@ function fetchRestaurantFromURL(callback) {
     }
 }
 
+function getLargeImageVersion(imagePath) {
+    const index = imagePath.lastIndexOf('/') + 1;
+    return imagePath.substr(0, index) + 'large' + imagePath.substr(index);
+}
+
+function populatePicture(picture, restaurant) {
+    const imageJpg = getLargeImageVersion(DBHelper.imageUrlForRestaurant(restaurant, 'jpg'));
+    const imageWebp = getLargeImageVersion(DBHelper.imageUrlForRestaurant(restaurant, 'webp'));
+
+    const sourceWebp = document.createElement('source');
+    sourceWebp.srcset = imageWebp;
+    sourceWebp.type = 'image/webp';
+
+    const sourceJpg = document.createElement('source');
+    sourceJpg.srcset = imageJpg;
+    sourceJpg.type = 'image/jpeg';
+
+    const image = document.createElement('img');
+    image.className = 'restaurant-img';
+    image.src = imageJpg;
+    image.alt = `Image representing the restaurant ${restaurant.name}`;
+
+    picture.append(sourceWebp);
+    picture.append(sourceJpg);
+    picture.append(image);
+}
+
 /**
  * Create restaurant HTML and add it to the webpage
  */
@@ -170,10 +197,8 @@ function fillRestaurantHTML(restaurant = self.restaurant) {
     const address = document.getElementById('restaurant-address');
     address.innerHTML = restaurant.address;
 
-    const image = document.getElementById('restaurant-img');
-    image.className = 'restaurant-img';
-    image.src = DBHelper.imageUrlForRestaurant(restaurant, 'jpg');
-    image.alt = `Image representing the restaurant ${restaurant.name}`;
+    const picture = document.getElementById('restaurant-img');
+    populatePicture(picture, restaurant);
 
     const cuisine = document.getElementById('restaurant-cuisine');
     cuisine.innerHTML = restaurant.cuisine_type;

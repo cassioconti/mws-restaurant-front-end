@@ -30,16 +30,12 @@ gulp.task('scripts-dist', function () {
         .pipe(minify())
         .pipe(gulp.dest('dist/'));
     gulp.src('js/main.js')
-        // .pipe(sourcemaps.init())
         .pipe(browserify())
         .pipe(minify())
-        // .pipe(sourcemaps.write())
         .pipe(gulp.dest('dist/js'));
     gulp.src('js/restaurant_info.js')
-        // .pipe(sourcemaps.init())
         .pipe(browserify())
         .pipe(minify())
-        // .pipe(sourcemaps.write())
         .pipe(gulp.dest('dist/js'));
 });
 
@@ -80,7 +76,8 @@ gulp.task('resize', function () {
 });
 
 gulp.task('convert2webp', function () {
-    return gulp.src(['img/1.jpg', 'img/2.jpg', 'img/3.jpg', 'img/4.jpg', 'img/5.jpg', 'img/6.jpg', 'img/7.jpg', 'img/8.jpg', 'img/9.jpg', 'img/no-image.jpg'])
+    // return gulp.src(['img/1.jpg', 'img/2.jpg', 'img/3.jpg', 'img/4.jpg', 'img/5.jpg', 'img/6.jpg', 'img/7.jpg', 'img/8.jpg', 'img/9.jpg', 'img/no-image.jpg'])
+    return gulp.src(['img/large1.jpg', 'img/large2.jpg', 'img/large3.jpg', 'img/large4.jpg', 'img/large5.jpg', 'img/large6.jpg', 'img/large7.jpg', 'img/large8.jpg', 'img/large9.jpg', 'img/largeno-image.jpg'])
         .pipe(imagemin([webp({
             quality: 75
         })]))

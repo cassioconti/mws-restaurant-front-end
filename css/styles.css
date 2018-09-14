@@ -1,4 +1,11 @@
 @charset "utf-8";
+
+@font-face {
+  font-family: "Open Sans";
+  font-display: auto;
+  src: url("/fonts/OpenSans-Regular-webfont.woff2") format("woff2");
+}
+
 /* CSS Document */
 
 body,
@@ -25,13 +32,13 @@ li {
 }
 
 a {
-  color: orange;
+  color: #B35E00;
   text-decoration: none;
 }
 
 a:hover,
 a:focus {
-  color: #3397db;
+  color: #207CBB;
   text-decoration: none;
 }
 
@@ -40,7 +47,7 @@ a img {
 }
 
 :focus {
-  box-shadow: 0 0 3pt 2pt orange;
+  box-shadow: 0 0 3pt 2pt #B35E00;
 }
 
 h1,
@@ -82,6 +89,10 @@ section {
   padding: 25px;
   text-align: center;
   text-transform: uppercase;
+}
+
+#footer a {
+  color: #FF9724;
 }
 
 /* ====================== Navigation ====================== */
@@ -154,7 +165,7 @@ nav a {
 
 .filter-options {
   width: 100%;
-  background-color: #3397DB;
+  background-color: #207CBB;
   align-items: center;
 }
 
@@ -211,7 +222,7 @@ nav a {
 }
 
 #restaurants-list li h2 {
-  color: #f18200;
+  color: #B35E00;
   font-family: Arial, sans-serif;
   font-size: 14pt;
   font-weight: 200;
@@ -227,7 +238,7 @@ nav a {
 }
 
 #restaurants-list li a {
-  background-color: orange;
+  background-color: #B35E00;
   border-bottom: 3px solid #eee;
   color: #fff;
   display: inline-block;
@@ -291,7 +302,7 @@ nav a {
   text-align: center;
 }
 
-#restaurant-img {
+#restaurant-img .restaurant-img {
   width: 100%;
 }
 
