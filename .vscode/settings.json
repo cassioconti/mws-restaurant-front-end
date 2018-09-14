@@ -1,14 +1,19 @@
 {
     "cSpell.words": [
         "Focusable",
+        "Udacity",
         "dbhelper",
         "googlecode",
         "idbhelper",
         "labelledby",
         "latlng",
+        "nanodegree",
+        "preconnect",
         "readwrite",
+        "resizer",
         "scrollwheel",
         "tabindex",
-        "toastr"
+        "toastr",
+        "webp"
     ]
 }

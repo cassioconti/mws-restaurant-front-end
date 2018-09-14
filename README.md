@@ -9,7 +9,7 @@ Replace `YOUR_GOOGLE_MAPS_API_KEY` by a valid Google Maps Javascript API key at:
 - `index.html:51`
 - `restaurant.html:58`
 
-# Build
+## Build
 
 Install packages:
 `yarn`
@@ -25,7 +25,9 @@ or:
 
 Run a localhost server:
 
-- Web Server for Chrome extension (serve the gulp generated `dist` folder)
+`yarn start`
+or:
+`npm start`
 
 The application will be served at: http://localhost:8887.
 

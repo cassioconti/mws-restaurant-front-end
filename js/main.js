@@ -137,17 +137,39 @@ function fillRestaurantsHTML(restaurants = self.restaurants) {
     addMarkersToMap();
 }
 
+function createHtmlPicture(restaurant) {
+    const imageJpg = DBHelper.imageUrlForRestaurant(restaurant, 'jpg');
+    const imageWebp = DBHelper.imageUrlForRestaurant(restaurant, 'webp');
+
+    const picture = document.createElement('picture');
+
+    const sourceWebp = document.createElement('source');
+    sourceWebp.srcset = imageWebp;
+    sourceWebp.type = 'image/webp';
+
+    const sourceJpg = document.createElement('source');
+    sourceJpg.srcset = imageJpg;
+    sourceJpg.type = 'image/jpeg';
+
+    const image = document.createElement('img');
+    image.className = 'restaurant-img';
+    image.src = imageJpg;
+    image.alt = `Image representing the restaurant ${restaurant.name}`;
+
+    picture.append(sourceWebp);
+    picture.append(sourceJpg);
+    picture.append(image);
+
+    return picture;
+}
+
 /**
  * Create restaurant HTML.
  */
 function createRestaurantHTML(restaurant) {
     const li = document.createElement('li');
 
-    const image = document.createElement('img');
-    image.className = 'restaurant-img';
-    image.src = DBHelper.imageUrlForRestaurant(restaurant);
-    image.alt = `Image representing the restaurant ${restaurant.name}`;
-    li.append(image);
+    li.append(createHtmlPicture(restaurant));
 
     const name = document.createElement('h2');
     name.innerHTML = restaurant.name;
